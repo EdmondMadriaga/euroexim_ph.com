@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  title: EuroEximGaming Player Load
+  version: 1.0.0
+servers:
+  - url: https://backend.euroeximgaming.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+paths:
+  /api/v1/user/login/player:
+    post:
+      tags:
+        - default
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: player100
+                password: player100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/bet/test:
+    post:
+      tags:
+        - default
+      summary: Add bet to a draw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                drawIds:
+                  - 67b84d3f7710675843d87831
+                numbers:
+                  - 1
+                  - 3
+                  - 5
+                  - 7
+                  - 8
+                  - 10
+                amount: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/draw/{gameId}/{status}:
+    get:
+      tags:
+        - default
+      summary: Get bettable draws
+      parameters:
+        - name: gameId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 679621bfa563f02c55d4ef3f
+        - name: status
+          in: path
+          schema:
+            type: string
+          required: true
+          example: OPEN,WAITING
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/wallet/cash-out/test:
+    post:
+      tags:
+        - default
+      summary: Request cash-out
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                amount: 5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/wallet/cash-in/test:
+    post:
+      tags:
+        - default
+      summary: Request cash-in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                amount: 15
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/register:
+    post:
+      tags:
+        - default
+      summary: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: player100
+                password: player100
+                retypePassword: player100
+                fullName: Player 100
+                emailAddress: player100@gmail.com
+                mobileNumber: '09123456789'
+                avatarDataUrl: https://randomuser.me/api/portraits/men/45.jpg
+                ids: []
+                gender: '{{GENDER}}'
+                dob: '{{DOB}}'
+                roleId: '{{ROLE_ID}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/verify:
+    post:
+      tags:
+        - default
+      summary: Verify account with OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                otp: '1234'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user:
+    get:
+      tags:
+        - default
+      summary: Get profile
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
